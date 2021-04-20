@@ -1,0 +1,48 @@
+<div class="p-4 mt-5 mb-2 container" style="border: 2px solid black">
+
+  <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" class="container" style="width:45%">
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="email" class="form-control" formControlName="username" id="username" autocomplete="on"
+        placeholder="Enter username" required />
+      <div class="alert alert-danger"
+        *ngIf="(loginForm.controls['username'].errors?.pattern) && (loginForm.controls['username'].dirty)">
+        Username must be in mail ID format
+      </div>
+      <div class="alert alert-danger"
+        *ngIf="(loginForm.controls['username'].touched) && (loginForm.controls['username'].errors?.required)">
+        Required Username
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <!-- <input type="password" class="form-control" formControlName="password" id="password" autocomplete="off"
+        placeholder="Enter Password" (input)="isValid = 0" required /> -->
+      <input type="password" class="form-control" formControlName="password" id="password" autocomplete="off"
+        placeholder="Enter Password" (input)="wrongPwd = false" required />
+      <div class="alert alert-danger"
+        *ngIf="(loginForm.controls['password'].errors?.minlength) && (loginForm.controls['password'].dirty)">
+        Password should be in minimum 4 charecters
+      </div>
+
+      <div class="alert alert-danger"
+        *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors?.required">
+        Required Password
+      </div>
+
+      <!-- <div class="alert alert-danger" 
+        *ngIf="loginForm.controls['password'].touched && isValid == 1"> -->
+      <div class="alert alert-danger" *ngIf="loginForm.controls['password'].touched && wrongPwd == true">
+        Invalid Password
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+
+    <a routerLink="/register" class="d-flex justify-content-end">Not yet register</a>
+
+  </form>
+
+</div>

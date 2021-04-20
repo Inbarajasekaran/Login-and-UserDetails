@@ -1,0 +1,109 @@
+<div id="the-form" class="p-4 mt-5 mb-2 container"
+    style="border: 2px solid black; background-color: rgb(250, 250, 250);">
+
+    <h2 class="d-flex justify-content-center">Register here</h2>
+    
+    <hr>
+
+    <form [formGroup]="registerUser" (ngSubmit)="submitRegisterUser()">
+        <div class="container">
+            <div class="row p-4 justify-content-center container">
+                <div class="col">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" placeholder="First name" formControlName="firstName">
+                    <div class="alert alert-danger"
+                        *ngIf="registerUser.controls['firstName'].touched && 
+                        registerUser.controls['firstName'].errors?.required">
+                        Firstname is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="registerUser.controls['firstName'].errors?.pattern">
+                        Name must only contains alphabets
+                    </div>
+                </div>
+                <div class="col">
+                    <label>Last name</label>
+                    <input type="text" class="form-control" placeholder="Last name" formControlName="lastName">
+                    <div class="alert alert-danger"
+                        *ngIf="registerUser.controls['lastName'].touched && 
+                        registerUser.controls['lastName'].errors?.required">
+                        Lastname is required
+                    </div>
+                    <div class="alert alert-danger" *ngIf="registerUser.controls['lastName'].errors?.pattern">
+                        Name must only contains alphabets
+                    </div>
+                </div>
+            </div>
+
+            <div class="row p-4 justify-content-center container">
+                <div class="col">
+                    <label>Username</label>
+                    <input type="text" class="form-control" placeholder="User name" formControlName="userName" 
+                        (input)="isValid = false">
+                    <div class="alert alert-danger"
+                        *ngIf="registerUser.controls['userName'].touched && 
+                        registerUser.controls['userName'].errors?.required ">
+                        Username is required
+                    </div>
+                    <div class="alert alert-danger"
+                        *ngIf="registerUser.controls['userName'].dirty && 
+                        registerUser.controls['userName'].errors?.pattern">
+                        Username can only contains Mail ID format
+                    </div>
+                    <div class="alert alert-danger" *ngIf="isValid == true">
+                        Username already exists..
+                    </div>
+                </div>
+                <div class="col">
+                    <label>Gender</label>
+                    <select name="gender" id="gender" class="form-control" formControlName="gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">Others</option>
+                    </select>
+                    <div class="alert alert-danger"
+                        *ngIf="registerUser.controls['gender'].touched && 
+                        registerUser.controls['gender'].errors?.required">
+                        Gender is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="row p-4 justify-content-center container">
+                <div class="col">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                    <div class="alert alert-danger"
+                        *ngIf="registerUser.controls['password'].touched && 
+                        registerUser.controls['password'].errors?.required">
+                        Password is required
+                    </div>
+                    <div class="alert alert-danger"
+                        *ngIf="registerUser.controls['password'].dirty && 
+                        registerUser.controls['password'].errors?.minlength">
+                        Password must be atleast 4 charecters
+                    </div>
+                </div>
+                <div class="col">
+                    <label>Retype Password</label>
+                    <input type="password" class="form-control" placeholder="Retype Password"
+                        formControlName="retypePassword">
+                    <div *ngIf="!checkPassword(registerUser) && registerUser.controls['retypePassword'].dirty"
+                        class="alert alert-danger">Password does not match</div>
+                    <!-- <div class="alert alert-danger"
+                        (click)="print(registerUser.controls['retypePassword'].errors)">
+                        Password does not match
+                    </div> -->
+                    <!-- *ngIf="registerUser.controls['retypePassword'].touched && 
+                    registerUser.controls['retypePassword'].errors?.mismatch == true" -->
+                </div>
+            </div>
+
+            <div class="p-4 d-flex justify-content-between">
+                <a routerLink="/login">Already have an account</a>
+                <button type="submit" class="btn btn-primary" [disabled]="registerUser.invalid">Submit</button>
+            </div>
+
+        </div>
+    </form>
+
+</div>

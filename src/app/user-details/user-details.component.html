@@ -1,0 +1,43 @@
+<div style="border: 2px solid black;" class="mt-5 p-2 container">
+
+    <h3 style="text-decoration: underline; color:white; background-color: #007BFF; border-left: solid 9px#f85060;"
+        class="d-flex p-4 justify-content-center">User Details
+    </h3>
+    <hr>
+    <div class="container">
+        <div class="p-3 mb-5 container">
+            <h1>Welcome {{username}} ..! </h1>
+        </div>
+        <!-- <div class="p-3" style="line-height: 1.5em; font-size: 18px;" *ngFor="let all of userDetails">
+            <b>Name:</b> {{all['firstname']}},
+            <b>UserID:</b> {{all['username']}},
+            <b>Password:</b> {{all['password']}}
+            <br>
+        </div> -->
+
+        <table class="table table-responsive-lg table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">User-ID</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let loop of userDetails; let i = index">
+                     <th scope="row">{{i+1}}</th> 
+                    <td scope="row"> {{loop['firstname']}}</td>
+                    <td scope="row">{{loop['username']}}</td>
+                    <td scope="row">{{loop['gender']}}</td>
+                    <td scope="row">{{loop['password']}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+    
+
+</div>

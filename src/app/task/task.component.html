@@ -1,0 +1,61 @@
+<div class="mt-5 container" style="border: 2px solid black">
+    <div class="mt-5 p-5 container d-flex-collumn" style="border: 1px solid rgb(182, 182, 182);">
+      <h3>Hello {{test}}...Welcome</h3>
+      <input type="text" placeholder="Your name please.." [(ngModel)]="testvalue">
+      <button (click)="changeIt()">Click to see change</button>
+    </div>
+  
+    <div class="container d-flex justify-content-center mt-5 p-2">
+      <input type="text" id="username" [(ngModel)]="name" style="border: solid 0.5px;" />
+      <input type="passsword" id="passsword" [(ngModel)]="password" style="border: solid 0.5px;" />
+    </div>
+    <h2 class="d-flex justify-content-center p-5"> {{name}} {{password}} </h2>
+    <div class="d-flex justify-content-center p-3">
+      <button (click)="addTextbox()" class="p-1 m-2">Add Textbox</button>
+      <button (click)="removeTextbox()" class="p-1 m-2">Remove Textbox</button>
+    </div>
+    <div class="d-flex justify-content-center p-5">
+      <input type="text" *ngFor="let itterate of numbers; let i=index" [(ngModel)]="numbers[i]" />
+    </div>
+  </div>
+  
+  <div class="container mt-5 p-5" style="border: 2px solid black">
+    <div class="d-flex justify-content-center p-3">
+      <div *ngIf="condition; else otherblock">
+        No values found in person
+      </div>
+    </div>
+    <div class="d-flex justify-content-center p-3">
+      <ng-template #otherblock>
+        <ul style="font-size: 18px; font-weight: bold;">
+          <li *ngFor="let people of person" id="showPeople">
+  
+            <div [ngStyle]="{'color' : people.age >= 18 ? 'green' : 'red'}">
+              {{people.name}}, {{people.age}}
+            </div>
+            <!-- <div *ngIf="people.age >= 18" style="color:green;">
+              {{people.name}}, {{people.age}}
+            </div>
+            <div *ngIf="people.age < 18" style="color: red;">
+              {{people.name}}, {{people.age}}
+            </div> -->
+          </li>
+        </ul>
+      </ng-template>
+      <input type="text" [(ngModel)]='addPersonName' placeholder="Name here">
+      <input type="text" [(ngModel)]='addPersonAge' [disabled]='!addPersonName' placeholder="Age here">
+    </div>
+    <button [disabled]='!addPersonAge' (click)='addPerson()' class="p-1 m-2">Add person</button>
+    <button (click)='clearPerson()' class="p-1 m-2">Clear person</button>
+    <button (click)='deleteAll()' class="p-1 m-2">Remove All</button>
+  
+    <div class="mt-5 d-flex-collumn justify-content-center">
+      <input [(ngModel)]="isImportant" placeholder="type here..">
+      <p [style.color]="isImportant ? 'red' : 'green'">
+        Green color by default and Red color while you add text at input box
+      </p>
+    </div>
+  
+  </div>
+  
+  
